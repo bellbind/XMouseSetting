@@ -10,7 +10,7 @@ X-Mouse setting tool for Windows7/Vista.
 
 Build `XMouseSetting.exe`
 
-    csc.exe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
+    csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
 
 [Hint] Location of `csc.exe` on 64bit Windows .NET 3.5:
 

@@ -1,6 +1,6 @@
 // [X-Mouse setting tool on Windows 7/Vista]
 // build:
-//   csc.exe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
+//   csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
 // csc on 64bit .NET 3.5:
 //   c:\Windows\Microsoft.NET\Framework64\v3.5\csc.exe
 // csc on 32bit .NET 3.5:
