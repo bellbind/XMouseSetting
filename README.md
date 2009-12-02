@@ -43,6 +43,6 @@ NOTICE: To enable new settings, you must **re-login**.
 ## Other
 
 - Author: bellbind@gmail.com
-- Site: [http://github.com/bellbind/XMouseSetting][http://github.com/bellbind/XMouseSetting]
+- Site: [http://github.com/bellbind/XMouseSetting](http://github.com/bellbind/XMouseSetting)
 - License: [LGPL](http://www.opensource.org/licenses/lgpl-3.0.html)
 
