@@ -21,6 +21,36 @@ namespace Bellbind.XMouseSetting {
   }
   
   public class XMouseSetting {
+    // library functions
+    public static Info GetXMouse() {
+      using (var regkey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop")) {
+        var masks = regkey.GetValue("UserPreferencesMask") as byte[];
+        return new Info {
+          FollowActivation = (masks[0] & 0x01) != 0,
+          AutoRaise = (masks[0] & 0x40) != 0,
+          RaiseTime = regkey.GetValue("ActiveWndTrkTimeout") as int?,
+        };
+      }
+    }
+    public static void SetXMouse(Info info) {
+      SetXMouse(info.FollowActivation, info.AutoRaise, info.RaiseTime ?? 0);
+    }
+    
+    public static void SetXMouse(bool followActivation, bool autoRaise, int raiseTime) {
+      using (var regkey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true)) {
+        var masks = regkey.GetValue("UserPreferencesMask") as byte[];
+        masks[0] = (byte) (followActivation ? masks[0] | 0x01 : masks[0] & ~0x01);
+        masks[0] = (byte) (followActivation && autoRaise ? masks[0] | 0x40 : masks[0] & ~0x40);
+        regkey.SetValue("UserPreferencesMask", masks);
+        if (autoRaise) {
+          regkey.SetValue("ActiveWndTrkTimeout", raiseTime);
+        } else {
+          regkey.DeleteValue("ActiveWndTrkTimeout", false);
+        }
+      }
+    }
+    
+    // application implementation
     [STAThread]
     static void Main(string[] args) {
       if (args.Length == 0) {
@@ -85,34 +115,6 @@ namespace Bellbind.XMouseSetting {
       Console.WriteLine("  Follow Activation: {0}", info.FollowActivation);
       Console.WriteLine("  Auto Raise: {0}", info.AutoRaise);
       Console.WriteLine("  Raise Time (msec): {0}", info.RaiseTime);
-    }
-    
-    public static Info GetXMouse() {
-      using (var regkey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop")) {
-        var masks = regkey.GetValue("UserPreferencesMask") as byte[];
-        return new Info {
-          FollowActivation = (masks[0] & 0x01) != 0,
-          AutoRaise = (masks[0] & 0x40) != 0,
-          RaiseTime = regkey.GetValue("ActiveWndTrkTimeout") as int?,
-        };
-      }
-    }
-    public static void SetXMouse(Info info) {
-      SetXMouse(info.FollowActivation, info.AutoRaise, info.RaiseTime ?? 0);
-    }
-    
-    public static void SetXMouse(bool followActivation, bool autoRaise, int raiseTime) {
-      using (var regkey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true)) {
-        var masks = regkey.GetValue("UserPreferencesMask") as byte[];
-        masks[0] = (byte) (followActivation ? masks[0] | 0x01 : masks[0] & ~0x01);
-        masks[0] = (byte) (followActivation && autoRaise ? masks[0] | 0x40 : masks[0] & ~0x40);
-        regkey.SetValue("UserPreferencesMask", masks);
-        if (autoRaise) {
-          regkey.SetValue("ActiveWndTrkTimeout", raiseTime);
-        } else {
-          regkey.DeleteValue("ActiveWndTrkTimeout", false);
-        }
-      }
     }
     
     // use WPF
