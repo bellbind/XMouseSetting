@@ -1,6 +1,6 @@
 // [X-Mouse setting tool on Windows 7/Vista]
 // build:
-//   csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
+//   csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll /win32icon:icon.ico
 // csc on 64bit .NET 3.5:
 //   c:\Windows\Microsoft.NET\Framework64\v3.5\csc.exe
 // csc on 32bit .NET 3.5:
@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 class XMouseSetting {
   [System.STAThread]
@@ -106,12 +107,12 @@ class XMouseSetting {
   static void LaunchUI() {
     // widgets
     var followActivation = new CheckBox {
-      Content = new TextBlock(new Run("Follow Activation")),
+      Content = new TextBlock(new Run("Activate a window when mouse entered")),
       IsChecked = true,
       IsEnabled = true,
     };
     var autoRaise = new CheckBox {
-      Content = new TextBlock(new Run("AutoRaise")),
+      Content = new TextBlock(new Run("Auto raise")),
       IsChecked = true,
       IsEnabled = true,
     };
@@ -129,7 +130,7 @@ class XMouseSetting {
     var panelRaiseTime = new DockPanel {
       Children = {
         new Label {
-          Content = new TextBlock(new Run("Raise Time: ")),
+          Content = new TextBlock(new Run("Raise time: ")),
         },
         raiseTime,
       },
@@ -141,12 +142,20 @@ class XMouseSetting {
     var window = new Window {
       Width = 300,
       Height = 150,
-      Title = "X-Mouse Setting",
+      //Opacity = 0.9,
+      Title = "X-Mouse Settings",
       Content = new StackPanel {
         Children = {
-          followActivation,
-          autoRaise,
-          panelRaiseTime,
+          new GroupBox {
+            Header = "X-Mouse Settings", 
+            Content = new StackPanel {
+              Children = {
+                followActivation,
+                autoRaise,
+                panelRaiseTime,
+              },
+            },
+          },
           save,
         },
       },

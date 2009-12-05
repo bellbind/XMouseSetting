@@ -10,15 +10,19 @@ X-Mouse setting tool for Windows7/Vista.
 
 Build `XMouseSetting.exe` on command line
 
-    csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll
+    csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll /win32icon:icon.ico
 
-## Usage
+## Usage: GUI
 
-Launch GUI:
+- Launch `XMouseSetting.exe`. 
+- Change settings and push "save" button, then logoff. 
+- Login again.
 
-    XMouseSetting.exe
+## Usage: Command-line
 
-or simply **double-click** it.
+Print help and current settings:
+
+    XMouseSetting.exe help
 
 Set to activate a window over mouse:
 
