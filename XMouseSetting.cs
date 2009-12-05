@@ -88,13 +88,6 @@ namespace Bellbind.XMouseSetting {
       Console.WriteLine("To enable new settings, you must re-login.");
     }
     
-    static void PrintNewXMouse(bool followActivation, bool autoRaise, int raiseTime) {
-      Console.WriteLine("New XMouse Settings:");
-      Console.WriteLine("  Follow Activation: {0}", followActivation);
-      Console.WriteLine("  Auto Raise: {0}", autoRaise);
-      Console.WriteLine("  Raise Time (msec): {0}", raiseTime);
-    }
-    
     static void ShowHelp() {
       Console.WriteLine("Usage: XMouseSetting [on [NUM]|off|help]");
       Console.WriteLine("Options: ");
@@ -106,11 +99,18 @@ namespace Bellbind.XMouseSetting {
     }
     
     static void ShowXMouse() {
-      Info info = GetXMouse();
+      var info = GetXMouse();
       Console.WriteLine("Current XMouse Settings:");
-      Console.WriteLine("  Follow Activation: {0}", info.FollowActivation);
-      Console.WriteLine("  Auto Raise: {0}", info.AutoRaise);
-      Console.WriteLine("  Raise Time (msec): {0}", info.RaiseTime);
+      PrintXMouse(info.FollowActivation, info.AutoRaise, info.RaiseTime);
+    }
+    static void PrintNewXMouse(bool followActivation, bool autoRaise, int raiseTime) {
+      Console.WriteLine("New XMouse Settings:");
+      PrintXMouse(followActivation, autoRaise, raiseTime);
+    }
+    static void PrintXMouse(bool followActivation, bool autoRaise, int? raiseTime) {
+      Console.WriteLine("  Follow Activation: {0}", followActivation);
+      Console.WriteLine("  Auto Raise: {0}", autoRaise);
+      Console.WriteLine("  Raise Time (msec): {0}", raiseTime);
     }
     
     // use WPF
