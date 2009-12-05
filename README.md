@@ -1,10 +1,10 @@
 # X-Mouse Setting Tool
 
-X-Mouse setting tool for Windows7/Vista.
+X-Mouse setting tool for Windows7/Vista/XP (with .NET 3.5).
 
 ## Requirement
 
-- Windows7/Vista (with .NET 3.5)
+- Windows7/Vista/XP (with .NET 3.5): not required .NET SDK
 
 ## Build
 
