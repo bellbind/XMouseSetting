@@ -1,10 +1,6 @@
-// [X-Mouse setting tool on Windows 7/Vista]
+// [X-Mouse setting tool on Windows 7/Vista/XP with .NET 3.5]
 // build:
 //   csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll /win32icon:icon.ico
-// csc on 64bit .NET 3.5:
-//   c:\Windows\Microsoft.NET\Framework64\v3.5\csc.exe
-// csc on 32bit .NET 3.5:
-//   c:\Windows\Microsoft.NET\Framework\v3.5\csc.exe
 namespace Bellbind.XMouseSetting {
   using Microsoft.Win32;
   using System;
@@ -42,7 +38,7 @@ namespace Bellbind.XMouseSetting {
         masks[0] = (byte) (followActivation ? masks[0] | 0x01 : masks[0] & ~0x01);
         masks[0] = (byte) (followActivation && autoRaise ? masks[0] | 0x40 : masks[0] & ~0x40);
         regkey.SetValue("UserPreferencesMask", masks);
-        if (autoRaise) {
+        if (followActivation && autoRaise) {
           regkey.SetValue("ActiveWndTrkTimeout", raiseTime);
         } else {
           regkey.DeleteValue("ActiveWndTrkTimeout", false);
