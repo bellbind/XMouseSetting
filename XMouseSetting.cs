@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using System.Windows.Media;
 
 class XMouseSetting {
   [System.STAThread]
@@ -142,7 +141,7 @@ class XMouseSetting {
     var window = new Window {
       Width = 300,
       Height = 150,
-      //Opacity = 0.9,
+      Opacity = 0.9,
       Title = "X-Mouse Settings",
       Content = new StackPanel {
         Children = {
