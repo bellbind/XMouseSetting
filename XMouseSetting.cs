@@ -129,7 +129,7 @@ class XMouseSetting {
     var panelRaiseTime = new DockPanel {
       Children = {
         new Label {
-          Content = new TextBlock(new Run("Raise time: ")),
+          Content = new TextBlock(new Run("Raise after (msec): ")),
         },
         raiseTime,
       },
