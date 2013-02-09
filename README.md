@@ -1,16 +1,20 @@
 # X-Mouse Setting Tool
 
-X-Mouse setting tool for Windows7/Vista/XP (with .NET 3.5).
+X-Mouse setting tool for Windows8Windows7/Vista/XP (with .NET 3.5).
 
 ## Requirement
 
-- Windows7/Vista/XP (with .NET 3.5): not required .NET SDK
+- Windows8/Windows7/Vista/XP (with .NET 3.5): not required .NET SDK
 
 ## Build
 
 Build `XMouseSetting.exe` on command line
 
     csc.exe /t:winexe XMouseSetting.cs /r:PresentationFramework.dll /r:PresentationCore.dll /r:WindowsBase.dll /win32icon:icon.ico
+
+## Binary
+
+- [github downloads](https://github.com/bellbind/XMouseSetting/downloads/)
 
 ## Usage: GUI
 
